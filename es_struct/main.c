@@ -3,10 +3,10 @@
 #include <string.h>
 #define N 20
 
-    typedef struct libro{
+    typedef struct llibro{
         char titolo[N];
         char autore[N];
-        double prezzo;
+        int prezzo;
         int pagine;
         char casa_editrice[N];
     }libro;
@@ -15,32 +15,70 @@
     {
         libro libri[5];
         int i;
-        for(i=0;i<strlen(libri);i++){
-            printf("Inserisci il titolo del libro:");
-
-            printf("Inserisci l'autore del libro:");
-
-            printf("Inserisci la casa editrice del libro:");
-
-            printf("Inserisci il prezzo del libro:");
-
-            printf("Inserisci il numero di pagine del libro:");
-        }
+        aggiungi(libri);
+        Titolo_da_trovare(libri);
+        piu_pagine(libri);
+        economico(libri);
         return 0;
     }
 
-    void aggiungi(libro libri){
-
-        for(i=0;i<strlen(libri);i++){
+    void aggiungi(libro* libri){
+        int i;
+        for(i=0;i<5;i++){
                 printf("Inserisci il titolo del libro:");
-                gets(libri[i].titolo);
+                scanf("%s",(libri+i)->titolo);
                 printf("Inserisci l'autore del libro:");
-                gets(libri[i].autore);
+                scanf("%s",(libri+i)->autore);
                 printf("Inserisci la casa editrice del libro:");
-                gets(libri[i].casa_editrice);
+                scanf("%s",(libri+i)->casa_editrice);
                 printf("Inserisci il prezzo del libro:");
-                gets(libri[i].prezzo);
+                scanf("%d",&(libri+i)->prezzo);
                 printf("Inserisci il numero di pagine del libro:");
-                gets(libri[i].pagine);
+                scanf("%d",&(libri+i)->pagine);
+                printf("===========================================\n");
             }
+    }
+    void Titolo_da_trovare(libro* libri){
+        char title[N];
+        printf("Inserisci il titolo da trovare:");
+        scanf("%s",title);
+        int i,cond,k;
+        for(i=0;i<5;i++){
+            for(k=0;k<N;k++){
+               if(((libri+i)->titolo)+k == (title+k))
+               {
+                 cond=1;
+
+               }else{
+
+                cond=0;
+               }
+            }
+
+        }
+        printf(cond==1 ? "\nTrovato!\n" : "\nTitolo assente.\n");
+    }
+
+    void piu_pagine(libro* libri){
+    int i,max = 0,j=0;
+        for(i=0;i<5;i++){
+            if(((libri+i)->pagine)>max){
+                max=(libri+i)->pagine;
+                j=i;
+            }
+
+        }
+        printf("Il libro con piu' pagine e' %s\n",((libri+j)->titolo));
+    }
+
+    void economico(libro* libri){
+    int i,min = 99999999999,h=0;
+        for(i=0;i<5;i++){
+            if(((libri+i)->prezzo) < min){
+                min=(libri+i)->prezzo;
+                h=i;
+            }
+
+        }
+        printf("Il libro piu' economico e' %s\n",((libri+h)->titolo));
     }
