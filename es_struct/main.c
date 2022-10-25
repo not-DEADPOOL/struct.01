@@ -45,14 +45,7 @@
         int i,cond,k;
         for(i=0;i<5;i++){
             for(k=0;k<N;k++){
-               if(((libri+i)->titolo)+k == (title+k))
-               {
-                 cond=1;
-
-               }else{
-
-                cond=0;
-               }
+                cond=(libri+i)->titolo[k] == title[k] ? 1 : 0;
             }
 
         }
