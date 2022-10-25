@@ -1,2 +1,3 @@
 # struct.01
-Just an exercise 
+Dies of cringe
+
