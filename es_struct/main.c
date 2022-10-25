@@ -14,11 +14,13 @@
     int main()
     {
         libro libri[5];
-        int i;
         aggiungi(libri);
         Titolo_da_trovare(libri);
+        Autore_sort(libri);
+        Titolo_sort(libri);
         piu_pagine(libri);
         economico(libri);
+
         return 0;
     }
 
@@ -35,7 +37,7 @@
                 scanf("%d",&(libri+i)->prezzo);
                 printf("Inserisci il numero di pagine del libro:");
                 scanf("%d",&(libri+i)->pagine);
-                printf("===========================================\n");
+                printf("===================================================\n");
             }
     }
     void Titolo_da_trovare(libro* libri){
@@ -51,6 +53,8 @@
         }
         printf(cond==1 ? "\nTrovato!\n" : "\nTitolo assente.\n");
     }
+
+
 
     void piu_pagine(libro* libri){
     int i,max = 0,j=0;
@@ -74,4 +78,36 @@
 
         }
         printf("Il libro piu' economico e' %s\n",((libri+h)->titolo));
+    }
+
+    void Titolo_sort(libro* libri)
+    {
+        int i;
+        for(i = 1; i < 3; i++)
+        {
+            while((libri+i)->titolo[0] < (libri+(i-1))->titolo[0] && i > 0)
+            {
+                libro tmp = libri[i];
+                libri[i] = libri[i-1];
+                libri[i-1] = tmp;
+                i--;
+            }
+
+        }
+    }
+
+    void Autore_sort(libro* libri)
+    {
+        int i;
+        for(i = 1; i < 3; i++)
+        {
+            while((libri+i)->autore[0] < (libri+(i-1))->autore[0] && i > 0)
+            {
+                libro tmp = libri[i];
+                libri[i] = libri[i-1];
+                libri[i-1] = tmp;
+                i--;
+            }
+
+        }
     }
